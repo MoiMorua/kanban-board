@@ -1,0 +1,15 @@
+<section>
+    <header>
+        <h1>{{title}}</h1>
+    </header>
+    <main>
+        <div *ngFor="let task of taskList">
+            {{task.name}}
+            <div>
+                <button class="task__btn task__btn_prev" [disabled]="!canMoveToLeft" (click)="moveTask(task,'-')"><</button>
+                <button class="task__btn task__btn_next" [disabled]="!canMoveToRight" (click)="moveTask(task,'+')">></button>
+                <button class="task__btn task__btn_remove" (click)="removeTask(task)">x</button>
+            </div>
+        </div>
+    </main>
+</section>
