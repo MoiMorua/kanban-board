@@ -1,15 +1,17 @@
-<section>
-    <header>
+<section class="kanban__main">
+    <header class="kanban__main_header">
         <form [formGroup]="form" (ngSubmit)="createTask()">
-            <input type="text" id="name" formControlName="name" placeholder="New task name">
-            <label *ngIf="(form.get('name').invalid && form.get('name').dirty)" for="name">Please, type a name for the task</label>
+            <div class="input_group">
+                <input #name type="text" id="name" formControlName="name" placeholder="New task name">
+                <label class="input_group_danger" *ngIf="(form.get('name').invalid && form.get('name').dirty) || showError" for="name">Please, type a name for the task</label>
+            </div>
             <button type="submit">Create task</button>
         </form>
     </header>
-    <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="Backlog" [canMoveToLeft]="false" [canMoveToRight]="true" [taskList]="backlog"></app-task-container>
-    <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="To do" [canMoveToLeft]="true" [canMoveToRight]="true" [taskList]="todo"></app-task-container>
-    <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="On going" [canMoveToLeft]="true" [canMoveToRight]="true" [taskList]="ongoing"></app-task-container>
-    <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="Done" [canMoveToLeft]="true" [canMoveToRight]="false" [taskList]="done"></app-task-container>
+    <div class="kanban__main_stages">
+        <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="Backlog" [canMoveToLeft]="false" [canMoveToRight]="true" [taskList]="backlog"></app-task-container>
+        <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="To do" [canMoveToLeft]="true" [canMoveToRight]="true" [taskList]="todo"></app-task-container>
+        <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="On going" [canMoveToLeft]="true" [canMoveToRight]="true" [taskList]="ongoing"></app-task-container>
+        <app-task-container (moveTaskEmmiter)="moveTask($event)" (removeTaskEmmiter)="removeTask($event)" title="Done" [canMoveToLeft]="true" [canMoveToRight]="false" [taskList]="done"></app-task-container>
+    </div>
 </section>
-
-{{form.value|json}}

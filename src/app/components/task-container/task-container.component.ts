@@ -32,13 +32,12 @@ export class TaskContainerComponent {
     this.removeTaskEmmiter = new EventEmitter();
   }
 
-  moveTask(task:Task,direction:string){    
-    
+  moveTask(task:Task,direction:string){        
     this.moveTaskEmmiter.emit({
       ...task,      
       stage:direction==="+"?task.stage+1:task.stage-1,
-      stageName: STAGES[(direction==="+"?task.stage+1:task.stage-1)-1],
-      previous: STAGES[task.stage-1]
+      stageName: STAGES[(direction==="+"?task.stage+1:task.stage-1)],
+      previous: STAGES[task.stage]
     });
 
   }
@@ -46,8 +45,5 @@ export class TaskContainerComponent {
   removeTask(task:Task){
     this.removeTaskEmmiter.emit(task);
   }
-
-  
-
 
 }

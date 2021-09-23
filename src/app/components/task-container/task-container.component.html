@@ -1,15 +1,15 @@
-<section>
+<section class="task__container">
     <header>
         <h1>{{title}}</h1>
     </header>
-    <main>
-        <div *ngFor="let task of taskList">
-            {{task.name}}
-            <div>
-                <button class="task__btn task__btn_prev" [disabled]="!canMoveToLeft" (click)="moveTask(task,'-')"><</button>
-                <button class="task__btn task__btn_next" [disabled]="!canMoveToRight" (click)="moveTask(task,'+')">></button>
-                <button class="task__btn task__btn_remove" (click)="removeTask(task)">x</button>
+    <ul class="task__container__task_list">
+        <li *ngFor="let task of taskList">
+            <h3 [title]="task.name">{{task.name}}</h3>
+            <div class="task__btn_container">
+                <button title="Previous" class="task__btn task__btn_prev" [disabled]="!canMoveToLeft" (click)="moveTask(task,'-')"></button>
+                <button title="Next" class="task__btn task__btn_next" [disabled]="!canMoveToRight" (click)="moveTask(task,'+')"></button>
+                <button title="Remove" class="task__btn task__btn_remove" (click)="removeTask(task)"></button>
             </div>
-        </div>
-    </main>
+        </li>
+    </ul>
 </section>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 import Task from '../../common/interface';
@@ -10,13 +10,15 @@ import Task from '../../common/interface';
 })
 export class MainPageComponent implements OnInit {
 
+  @ViewChild('name',{static:true}) name:ElementRef;
 
-  // tasks: [Task[]]
+  
   backlog:Task[] = [];
   todo:Task[] = [];
   ongoing:Task[] = [];
   done:Task[] = [];
   form: FormGroup;
+  showError:boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
@@ -31,12 +33,18 @@ export class MainPageComponent implements OnInit {
 
   createTask(){
     
-    if(!this.form.valid) return;
+    if(!this.form.valid) {
+      this.showError = true;
+      this.name.nativeElement.focus()
+      return
+    };
+
+    this.showError = false;
 
     this.backlog.push({
       uuid: uuidv4(),
       name: this.form.get('name').value,
-      stage: 1,
+      stage: 0,
       stageName:'backlog'
     });
 
@@ -47,7 +55,8 @@ export class MainPageComponent implements OnInit {
   }
 
   moveTask(task:Task){    
-    if(task.stage>4 || task.stage==0) return;
+    
+    if(task.stage>3 || task.stage<0) return;
     
     switch(task.previous){
       case 'backlog':
@@ -84,6 +93,7 @@ export class MainPageComponent implements OnInit {
   }
   
   removeTask(task:Task){
+    // debugger
     switch(task.stageName){
       case 'backlog':
           this.backlog.splice(this.backlog.findIndex(el=>el.uuid===task.uuid),1)          

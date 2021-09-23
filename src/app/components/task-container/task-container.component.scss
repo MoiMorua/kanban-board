@@ -1,0 +1,65 @@
+.task__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 15px;
+    min-height: 400px;
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    header {
+        h1 {
+            font-family: 'Titillium Web', sans-serif;
+        }
+    }
+    .task__container__task_list {
+        list-style: none;
+        width: 100%;
+        padding: 0;
+        margin: 15px;
+        box-sizing: border-box;
+        li {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            h3 {
+                width: 120px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .task__btn_container {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                .task__btn {
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    border: none;
+                    margin: 5px;
+                    background-color: rgba($color: #cacaca, $alpha: 1.0);
+                    background-size: 50%;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    cursor: pointer;
+                    &:disabled {
+                        cursor: not-allowed;
+                    }
+                    &.task__btn_prev {
+                        background-image: url('../../../assets/icons/svg/left-arrow.svg');
+                    }
+                    &.task__btn_next {
+                        background-image: url('../../../assets/icons/svg/right-arrow.svg');
+                    }
+                    &.task__btn_remove {
+                        background-image: url('../../../assets/icons/svg/trash.svg');
+                        background-color: rgba($color: #ff0000, $alpha: 1.0);
+                    }
+                }
+            }
+        }
+    }
+}
