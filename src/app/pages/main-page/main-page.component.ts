@@ -8,28 +8,29 @@ import Task from '../../common/interface';
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss']
 })
-export class MainPageComponent implements OnInit {
+export class MainPageComponent {
 
   @ViewChild('name',{static:true}) name:ElementRef;
 
-  
   backlog:Task[] = [];
+
   todo:Task[] = [];
+
   ongoing:Task[] = [];
+
   done:Task[] = [];
+
   form: FormGroup;
+
   showError:boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
+
     this.form = this.formBuilder.group({
       name:['',Validators.required]
     });
   
   }
-
-  ngOnInit(): void {
-  }
-
 
   createTask(){
     
@@ -88,12 +89,10 @@ export class MainPageComponent implements OnInit {
         break;
     }
 
-    
-
   }
   
-  removeTask(task:Task){
-    // debugger
+  removeTask(task:Task){   
+
     switch(task.stageName){
       case 'backlog':
           this.backlog.splice(this.backlog.findIndex(el=>el.uuid===task.uuid),1)          
@@ -108,6 +107,7 @@ export class MainPageComponent implements OnInit {
           this.done.splice(this.done.findIndex(el=>el.uuid===task.uuid),1)
         break;
     }
+    
   }
 
 
